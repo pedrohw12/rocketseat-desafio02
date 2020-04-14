@@ -32,7 +32,7 @@ app.post("/repositories", (request, response) => {
 
   repositories.push(repo);
 
-  return response.json(repositories);
+  return response.json(repo);
 });
 
 app.put("/repositories/:id", (request, response) => {
@@ -50,6 +50,7 @@ app.put("/repositories/:id", (request, response) => {
     title,
     url,
     techs,
+    likes: repositories[repoIndex].likes
   }
 
   repositories[repoIndex] = repo;
@@ -82,7 +83,9 @@ app.post("/repositories/:id/like", (request, response) => {
 
   repositories[repoIndex].likes += 1;
 
-  return response.status(200).json(repositories);
+  return response.status(200).json({
+     likes: repositories[repoIndex].likes 
+  });
 });
 
 module.exports = app;
